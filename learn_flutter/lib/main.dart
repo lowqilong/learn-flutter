@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyCoolApp());
 
 class MyCoolApp extends StatelessWidget {
+  var questionIndex = 0;
+
   void answerQuestion() {
-    print('Answer chosen!');
+    questionIndex = questionIndex + 1;
+    print(questionIndex);
   }
 
   @override
@@ -19,7 +22,9 @@ class MyCoolApp extends StatelessWidget {
         title: Text('My First App'),
       ),
       body: Column(children: [
-        Text('The question!'),
+        Text(
+          questions[questionIndex],
+        ),
         RaisedButton(
           child: Text('Answer 1'),
           onPressed: answerQuestion,
