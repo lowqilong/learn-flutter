@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
-void main() => runApp(MyCoolApp());
+void main() => runApp(MyApp());
 
-class MyCoolApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var questionIndex = 0;
 
   void answerQuestion() {
-    questionIndex = questionIndex + 1;
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
     print(questionIndex);
   }
 
@@ -22,7 +32,7 @@ class MyCoolApp extends StatelessWidget {
         title: Text('My First App'),
       ),
       body: Column(children: [
-        Text(
+        Question(
           questions[questionIndex],
         ),
         RaisedButton(
