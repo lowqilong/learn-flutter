@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,34 +13,72 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   var questionIndex = 0;
+  var totalScore = 0;
 
-  void answerQuestion() {
+  void resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+      totalScore = 0;
+    });
+  }
+
+  final questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 11},
+        {'text': 'Elephant', 'score': 5},
+        {'text': 'Lion', 'score': 9},
+      ],
+    },
+    {
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': [
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+      ],
+    },
+  ];
+
+  void answerQuestion(int score) {
+    totalScore += score;
+
     setState(() {
       questionIndex = questionIndex + 1;
     });
-    print(questionIndex);
+    if (questionIndex < questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?',
-    ];
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
         title: Text('My First App'),
       ),
-      body: Column(children: [
-        Question(
-          questions[questionIndex],
-        ),
-        RaisedButton(
-          child: Text('Answer 1'),
-          onPressed: answerQuestion,
-        ),
-      ]),
+      body: questionIndex < questions.length
+          ? Quiz(
+              answerQuestion: answerQuestion,
+              questionIndex: questionIndex,
+              questions: questions,
+            )
+          : Result(totalScore, resetQuiz),
     ));
   }
 }
