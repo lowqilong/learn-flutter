@@ -30,7 +30,7 @@ class _UserTransactionsState extends State<UserTransactions> {
       _transactions.add(Transaction(
         id: DateTime.now().toString(),
         title: newTitle,
-        amount: double.parse(newAmount),
+        amount: newAmount,
         date: DateTime.now(),
       ));
     });
