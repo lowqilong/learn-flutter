@@ -42,14 +42,14 @@ class _NewTransactionState extends State<NewTransaction> {
               autofocus: true,
               decoration: InputDecoration(labelText: 'Title'),
               controller: titleController,
-              onSubmitted: (_) => submitData(),
+              // onSubmitted: (_) => submitData(),
             ),
             TextField(
               autofocus: true,
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
               keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
+              // onSubmitted: (_) => submitData(),
             ),
             FlatButton(
               child: Text('Add Transaction'),
